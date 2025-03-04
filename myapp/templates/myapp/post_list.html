@@ -1,0 +1,18 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Post List{% endblock %}
+
+{% block content %}
+    <h1>Blog Posts</h1>
+    <ul class="post-list">
+        {% for post in posts %}
+            <li class="post-card">
+                <a href="{{ post.id }}/">{{ post.title }}</a>
+                <p>{{ post.content|truncatewords:20 }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="create-link">
+        <a href="create/" class="button">Create New Post</a>
+    </div>
+{% endblock %}
