@@ -8,7 +8,20 @@
         <p>{{ post.content }}</p>
         <small>Published on: {{ post.created_at }}</small>
         <br>
-        <a href="/" class="back-link">Back to Posts</a>
-        <a href="/{{ post.id }}/edit/" class="button">Edit Post</a>
+        <a href="/my_app" class="back-link">Back to Posts</a>
+        <a href="/my_app/{{ post.id }}/edit/" class="button">Edit Post</a>
+
+        <!-- Like Button Form -->
+        <form action="{% url 'like_post' post.pk %}" method="post">
+            {% csrf_token %}
+            {% if user in post.likes.all %}
+                <button type="submit">Unlike</button>
+            {% else %}
+                <button type="submit">Like</button>
+            {% endif %}
+        </form>
+
+        <!-- Display the number of likes -->
+        <p>{{ post.likes.count }} {{ post.likes.count|pluralize:"like,likes" }}</p>
     </div>
 {% endblock %}
